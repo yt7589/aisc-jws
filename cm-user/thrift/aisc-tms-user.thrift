@@ -1,5 +1,5 @@
 
-namespace java com.cszjkj.aisc.tms_user
+namespace java com.cszjkj.aisc.cm_user
 
 struct UserInfo {
     1:i64 userId,
