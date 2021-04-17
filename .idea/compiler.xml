@@ -6,9 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="cm-user" />
         <module name="tms-user" />
-        <module name="asic-tms-user" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="asic-tms-user" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
