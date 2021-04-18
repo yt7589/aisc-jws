@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cszjkj.aisc.tms_user.mapper.UserMapper">
+    <resultMap  type="com.cszjkj.aisc.cm_user.UserDTO" id="userDTO">
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="real_name" property="realName" jdbcType="VARCHAR"/>
+        <result column="login_name" property="loginName" jdbcType="VARCHAR"/>
+        <result column="login_pwd" property="loginPwd" jdbcType="VARCHAR"/>
+        <result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR"/>
+        <result column="email_addr" property="emailAddr" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id ="registerUser">
+        INSERT INTO e_user(real_name, login_name, login_pwd, mobile_phone, email_addr)
+        VALUES(#{u.realName}, #{u.loginName}, #{u.loginPwd}, #{u.mobilePhone}, #{u.emailAddr})
+    </insert>
+
+    <select id ="getUserByLoginName" resultMap="userDTO">
+        SELECT user_id, real_name, login_name, login_pwd, mobile_phone, email_addr
+        FROM e_user
+        WHERE login_name=${loginName}
+    </select>
+</mapper>
