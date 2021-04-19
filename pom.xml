@@ -16,6 +16,7 @@
     <modules>
         <module>tms-user</module>
         <module>cm-user</module>
+        <module>fms-user</module>
     </modules>
 
     <properties>

@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="cm-user" />
+        <module name="fms-user" />
         <module name="tms-user" />
       </profile>
     </annotationProcessing>
@@ -17,6 +18,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="cm-user" options="-parameters" />
+      <module name="fms-user" options="-parameters" />
       <module name="tms-user" options="-parameters" />
     </option>
   </component>

@@ -40,6 +40,7 @@ com\cszjkj\aisc\cm_user\UserInfo$UserInfoTupleScheme.class
 com\cszjkj\aisc\cm_user\UserService$AsyncProcessor$getUserByLoginName.class
 com\cszjkj\aisc\cm_user\UserService$getUserById_args.class
 com\cszjkj\aisc\cm_user\UserService$AsyncClient$getUserById_call.class
+com\cszjkj\aisc\cm_user\UserDTO.class
 com\cszjkj\aisc\cm_user\UserService$AsyncClient$registerUser_call.class
 com\cszjkj\aisc\cm_user\UserInfo$1.class
 com\cszjkj\aisc\cm_user\UserService$getUserById_result$getUserById_resultStandardScheme.class

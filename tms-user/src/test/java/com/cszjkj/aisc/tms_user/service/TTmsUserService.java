@@ -20,7 +20,7 @@ public class TTmsUserService {
         String targetRst = "Ok";
         String rst = "Ok";
 
-        String serverIp = "192.168.2.35";
+        String serverIp = "192.168.94.18";
         int serverPort = 9100;
         try {
             TSocket socket = new TSocket(serverIp, serverPort);
