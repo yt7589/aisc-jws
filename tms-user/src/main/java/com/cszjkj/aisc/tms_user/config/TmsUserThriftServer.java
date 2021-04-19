@@ -13,9 +13,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
+import java.util.logging.Logger;
 
 @Configuration
 public class TmsUserThriftServer {
+    private final static Logger logger = Logger.getLogger(TmsUserThriftServer.class.getName());
     @Autowired
     private UserService.Iface userService;
     @Value("${service.port}")
@@ -23,31 +25,22 @@ public class TmsUserThriftServer {
 
     @PostConstruct
     public void startThriftServer() {
-        System.out.println("step 1");
         TProcessor processor = new UserService.Processor<>(userService);
-        System.out.println("step 2");
         TNonblockingServerSocket socket = null;
         try {
             socket = new TNonblockingServerSocket(servicePort);
         } catch (TTransportException e) {
             e.printStackTrace();
         }
-        System.out.println("step 3");
         if (null == socket) {
             System.exit(1);
         }
-        System.out.println("step 4");
         TNonblockingServer.Args args = new TNonblockingServer.Args(socket);
-        System.out.println("step 5");
         args.processor(processor);
-        System.out.println("step 6");
         args.transportFactory(new TFramedTransport.Factory());
-        System.out.println("step 7");
         args.protocolFactory(new TBinaryProtocol.Factory());
-        System.out.println("step 8");
         TServer server = new TNonblockingServer(args);
-        System.out.println("step 9");
+        logger.info("启动Thrift服务器");
         server.serve();
-        System.out.println("step 10");
     }
 }
