@@ -3,18 +3,17 @@ package com.cszjkj.aisc.fms_user.controller;
 import com.cszjkj.aisc.cm_user.UserDTO;
 import com.cszjkj.aisc.cm_user.UserInfo;
 import com.cszjkj.aisc.fms_user.dto.LoginDTO;
-import com.cszjkj.aisc.fms_user.http.LoginResponse;
+import com.cszjkj.aisc.fms_user.dto.RegisterUserDTO;
 import com.cszjkj.aisc.fms_user.http.Response;
+import com.cszjkj.aisc.fms_user.rto.RegisterUserRTO;
 import com.cszjkj.aisc.fms_user.service.impl.FmsUserService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class FmsUserController {
     @Autowired
     private FmsUserService fmsUserService;
 
@@ -35,6 +34,26 @@ public class UserController {
         loginDTO.setUserDTO(userDTO);
         fmsUserService.cacheTokenUserDTO(token, userDTO);
         return new Response<>(loginDTO);
+    }
+
+    @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
+    public Response<RegisterUserDTO> registerUser(
+            @RequestBody RegisterUserRTO rto
+            ) {
+        if (StringUtils.isBlank(rto.getLoginName())) {
+            return Response.USER_LOGIN_NAME_CAN_NOT_BE_NULL;
+        }
+        if (StringUtils.isBlank(rto.getMobilePhone()) && StringUtils.isBlank(rto.getEmailAddr())) {
+            return Response.MOBILE_EMAIL_BOTH_NULL;
+        }
+        if (StringUtils.isBlank(rto.getVerifyCode())) {
+            return Response.VERIFY_CODE_NULL;
+        }
+        RegisterUserDTO dto = new RegisterUserDTO();
+        dto.setUserId(1008);
+        dto.setRoleId(1);
+        dto.setRoleName("系统管理员admin");
+        return new Response(dto);
     }
 
 
