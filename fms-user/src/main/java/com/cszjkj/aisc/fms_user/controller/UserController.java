@@ -5,12 +5,14 @@ import com.cszjkj.aisc.fms_user.http.Response;
 import com.cszjkj.aisc.fms_user.service.UserServiceProvider;
 import org.apache.thrift.TException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/user")
@@ -22,6 +24,8 @@ public class UserController {
     public final static String ALPHABETS_ALL = DIGITS + ALPHABETS_NO_CASE;
     @Autowired
     private UserServiceProvider userServiceProvider;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Response login(@RequestParam("loginName") String loginName, @RequestParam("loginPwd") String loginPwd) {
@@ -42,6 +46,8 @@ public class UserController {
         // 2. 生成token
         String token = generateToken();
         // 3. 缓存用户
+        int timeout = 60*24*14;
+        redisTemplate.opsForValue().set("yt0421", userInfo, timeout, TimeUnit.SECONDS);
         return null;
     }
 
