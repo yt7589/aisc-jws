@@ -3,6 +3,7 @@ package com.cszjkj.aisc.fms_user.controller;
 import com.cszjkj.aisc.cm_user.UserInfo;
 import com.cszjkj.aisc.fms_user.http.Response;
 import com.cszjkj.aisc.fms_user.service.UserServiceProvider;
+import com.cszjkj.aisc.fms_user.service.impl.FmsUserService;
 import org.apache.thrift.TException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -17,26 +18,12 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    public final static String DIGITS = "0123456789";
-    public final static String ALPHABETS_SUPER_CASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    public final static String ALPHABETS_LOWER_CASE = "abcdefghijklmnopqrstuvwxyz";
-    public final static String ALPHABETS_NO_CASE = ALPHABETS_SUPER_CASE + ALPHABETS_LOWER_CASE;
-    public final static String ALPHABETS_ALL = DIGITS + ALPHABETS_NO_CASE;
     @Autowired
-    private UserServiceProvider userServiceProvider;
-    @Autowired
-    private RedisTemplate redisTemplate;
+    private FmsUserService fmsUserService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Response login(@RequestParam("loginName") String loginName, @RequestParam("loginPwd") String loginPwd) {
-        UserInfo userInfo = null;
-        // 1. 验证登录名和密码
-        try {
-            userInfo = userServiceProvider.getUserService().getUserByLoginName(loginName);
-        } catch (TException e) {
-            e.printStackTrace();
-            return Response.USER_LOGIN_NAME_PWD_INVALID;
-        }
+        UserInfo userInfo = fmsUserService.login(loginName, loginPwd);
         if (null == userInfo) {
             return Response.USER_LOGIN_NAME_PWD_INVALID;
         }
@@ -44,27 +31,13 @@ public class UserController {
             return Response.USER_LOGIN_NAME_PWD_INVALID;
         }
         // 2. 生成token
-        String token = generateToken();
-        // 3. 缓存用户
-        int timeout = 60*24*14;
-        redisTemplate.opsForValue().set("yt0421", userInfo, timeout, TimeUnit.SECONDS);
+        String token = fmsUserService.generateToken();
+        fmsUserService.cacheTokenUserInfo(token, userInfo);
         return null;
     }
 
 
 
-    public String generateToken() {
-        return generateRandomCode(ALPHABETS_ALL, 32);
-    }
 
-    public String generateRandomCode(String alphabets, int size) {
-        StringBuilder code = new StringBuilder(size);
-        Random random = new Random();
-        int loc = 0;
-        for (int i=0; i<size; i++) {
-            loc = random.nextInt(alphabets.length());
-            code.append(alphabets.charAt(loc));
-        }
-        return code.toString();
-    }
+
 }
