@@ -1,5 +1,6 @@
 package com.cszjkj.aisc.tms_user.mapper;
 
+import com.cszjkj.aisc.cm_user.UserDTO;
 import com.cszjkj.aisc.cm_user.UserInfo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;

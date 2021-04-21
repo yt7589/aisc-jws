@@ -10,6 +10,9 @@ import org.apache.thrift.transport.layered.TFramedTransport;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 调用Thrift用户服务的工具类
  */
@@ -20,17 +23,24 @@ public class UserServiceProvider {
     @Value("${thrift.user.port}")
     private int serverPort;
 
-    public UserService.Client getUserService() {
+    public List<Object> getUserServiceInfo() {
+        List<Object> userServiceInfo = new ArrayList<>();
+        TSocket socket = null;
+        TTransport transport = null;
+        UserService.Client client = null;
         int timeout = 3000;
         try {
-            TSocket socket = new TSocket(serverIp, serverPort);
-            TTransport transport = new TFramedTransport(socket);
+            socket = new TSocket(serverIp, serverPort);
+            transport = new TFramedTransport(socket);
             transport.open();
             TProtocol protocol = new TBinaryProtocol(transport);
-            return new UserService.Client(protocol);
+            client = new UserService.Client(protocol);
         } catch (TTransportException e) {
             e.printStackTrace();
         }
-        return null;
+        userServiceInfo.add(socket);
+        userServiceInfo.add(transport);
+        userServiceInfo.add(client);
+        return userServiceInfo;
     }
 }
