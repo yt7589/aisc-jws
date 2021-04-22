@@ -1,5 +1,6 @@
 package com.cszjkj.aisc.fms_user.http;
 
+import com.cszjkj.aisc.cm_common.http.Response;
 import com.cszjkj.aisc.fms_user.dto.RegisterUserDTO;
 
 public class FmsUserResponse<T> extends Response<T> {

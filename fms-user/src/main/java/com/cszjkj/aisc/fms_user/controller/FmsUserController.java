@@ -1,11 +1,11 @@
 package com.cszjkj.aisc.fms_user.controller;
 
+import com.cszjkj.aisc.cm_common.http.Response;
 import com.cszjkj.aisc.cm_user.UserDTO;
 import com.cszjkj.aisc.cm_user.UserInfo;
 import com.cszjkj.aisc.fms_user.dto.LoginDTO;
 import com.cszjkj.aisc.fms_user.dto.RegisterUserDTO;
 import com.cszjkj.aisc.fms_user.http.FmsUserResponse;
-import com.cszjkj.aisc.fms_user.http.Response;
 import com.cszjkj.aisc.fms_user.rto.RegisterUserRTO;
 import com.cszjkj.aisc.fms_user.service.impl.FmsUserService;
 import org.apache.commons.lang.StringUtils;
@@ -18,7 +18,7 @@ public class FmsUserController {
     @Autowired
     private FmsUserService fmsUserService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/loginUser", method = RequestMethod.POST)
     public Response<LoginDTO> login(@RequestParam("loginName") String loginName, @RequestParam("loginPwd") String loginPwd) {
         UserInfo userInfo = fmsUserService.login(loginName, loginPwd);
         if (null == userInfo) {

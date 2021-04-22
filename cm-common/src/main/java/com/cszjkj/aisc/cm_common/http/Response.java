@@ -1,4 +1,4 @@
-package com.cszjkj.aisc.fms_user.http;
+package com.cszjkj.aisc.cm_common.http;
 
 import java.io.Serializable;
 
@@ -49,3 +49,4 @@ public class Response<T> implements Serializable {
         this.data = data;
     }
 }
+
