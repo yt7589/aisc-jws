@@ -1,5 +1,6 @@
 package com.cszjkj.aisc.fms_user.service.impl;
 
+import com.cszjkj.aisc.cm_common.util.AiscStringUtil;
 import com.cszjkj.aisc.cm_user.UserDTO;
 import com.cszjkj.aisc.cm_user.UserInfo;
 import com.cszjkj.aisc.cm_user.UserService;
@@ -20,11 +21,6 @@ import java.util.logging.Logger;
 @Service
 public class FmsUserService implements IFmsUserService {
     private final static Logger logger = Logger.getLogger(FmsUserService.class.getCanonicalName());
-    public final static String DIGITS = "0123456789";
-    public final static String ALPHABETS_SUPER_CASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    public final static String ALPHABETS_LOWER_CASE = "abcdefghijklmnopqrstuvwxyz";
-    public final static String ALPHABETS_NO_CASE = ALPHABETS_SUPER_CASE + ALPHABETS_LOWER_CASE;
-    public final static String ALPHABETS_ALL = DIGITS + ALPHABETS_NO_CASE;
 
     @Autowired
     private ServiceProvider serviceProvider;
@@ -53,7 +49,7 @@ public class FmsUserService implements IFmsUserService {
     }
 
     public String generateToken() {
-        return generateRandomCode(ALPHABETS_ALL, 32);
+        return AiscStringUtil.generateRandomCode(AiscStringUtil.ALPHABETS_ALL, 32);
     }
 
     @Override
@@ -68,16 +64,5 @@ public class FmsUserService implements IFmsUserService {
         UserDTO userDTO = new UserDTO();
         BeanUtils.copyProperties(userInfo, userDTO);
         return userDTO;
-    }
-
-    public static String generateRandomCode(String alphabets, int size) {
-        StringBuilder code = new StringBuilder(size);
-        Random random = new Random();
-        int loc = 0;
-        for (int i=0; i<size; i++) {
-            loc = random.nextInt(alphabets.length());
-            code.append(alphabets.charAt(loc));
-        }
-        return code.toString();
     }
 }
