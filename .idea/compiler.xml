@@ -10,6 +10,7 @@
         <module name="fms-user" />
         <module name="tms-user" />
         <module name="cm-user" />
+        <module name="cm-message" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -19,6 +20,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="cm-common" options="-parameters" />
+      <module name="cm-message" options="-parameters" />
       <module name="cm-user" options="-parameters" />
       <module name="fms-user" options="-parameters" />
       <module name="tms-user" options="-parameters" />
