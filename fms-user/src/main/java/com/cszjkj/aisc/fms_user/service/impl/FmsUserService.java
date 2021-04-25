@@ -4,7 +4,7 @@ import com.cszjkj.aisc.cm_user.UserDTO;
 import com.cszjkj.aisc.cm_user.UserInfo;
 import com.cszjkj.aisc.cm_user.UserService;
 import com.cszjkj.aisc.fms_user.service.IFmsUserService;
-import com.cszjkj.aisc.fms_user.service.UserServiceProvider;
+import com.cszjkj.aisc.fms_user.service.ServiceProvider;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransport;
 import org.springframework.beans.BeanUtils;
@@ -27,7 +27,7 @@ public class FmsUserService implements IFmsUserService {
     public final static String ALPHABETS_ALL = DIGITS + ALPHABETS_NO_CASE;
 
     @Autowired
-    private UserServiceProvider userServiceProvider;
+    private ServiceProvider serviceProvider;
     @Autowired
     private RedisTemplate redisTemplate;
 
@@ -35,10 +35,10 @@ public class FmsUserService implements IFmsUserService {
     public UserInfo login(String loginName, String loginPwd) {
         logger.info("loginName=" + loginName + "!");
         UserInfo userInfo = null;
-        List<Object> userServiceInfo = userServiceProvider.getUserServiceInfo();
+        List<Object> userServiceInfo = serviceProvider.getTmsUserEnv();
         logger.info("step 1");
-        TTransport transport = (TTransport) userServiceInfo.get(1);
-        UserService.Client client = (UserService.Client) userServiceInfo.get(2);
+        TTransport transport = (TTransport) userServiceInfo.get(ServiceProvider.SERVICE_ENV_IDX_TRANSPORT);
+        UserService.Client client = (UserService.Client) userServiceInfo.get(ServiceProvider.SERVICE_ENV_IDX_CLIENT);
         logger.info("step 2");
         // 1. 验证登录名和密码
         try {
