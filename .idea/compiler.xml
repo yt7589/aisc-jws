@@ -10,6 +10,7 @@
         <module name="fms-user" />
         <module name="tms-user" />
         <module name="cm-user" />
+        <module name="dms-customer" />
         <module name="cm-message" />
         <module name="cm-customer" />
       </profile>
@@ -24,6 +25,7 @@
       <module name="cm-customer" options="-parameters" />
       <module name="cm-message" options="-parameters" />
       <module name="cm-user" options="-parameters" />
+      <module name="dms-customer" options="-parameters" />
       <module name="fms-user" options="-parameters" />
       <module name="tms-user" options="-parameters" />
     </option>

@@ -20,6 +20,7 @@
         <module>cm-common</module>
         <module>cm-message</module>
         <module>cm-customer</module>
+        <module>dms-customer</module>
     </modules>
 
     <properties>
