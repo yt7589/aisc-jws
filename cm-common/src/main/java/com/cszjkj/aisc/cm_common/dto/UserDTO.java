@@ -1,4 +1,4 @@
-package com.cszjkj.aisc.cm_user;
+package com.cszjkj.aisc.cm_common.dto;
 
 public class UserDTO {
     private long userId;

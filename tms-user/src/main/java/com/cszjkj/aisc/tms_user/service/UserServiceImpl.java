@@ -5,7 +5,6 @@ import com.cszjkj.aisc.cm_user.UserInfo;
 import com.cszjkj.aisc.cm_user.UserService;
 import com.cszjkj.aisc.tms_user.mapper.UserMapper;
 import org.apache.thrift.TException;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

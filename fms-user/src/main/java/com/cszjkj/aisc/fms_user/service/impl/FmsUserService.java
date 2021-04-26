@@ -1,7 +1,7 @@
 package com.cszjkj.aisc.fms_user.service.impl;
 
 import com.cszjkj.aisc.cm_common.util.AiscStringUtil;
-import com.cszjkj.aisc.cm_user.UserDTO;
+import com.cszjkj.aisc.cm_common.dto.UserDTO;
 import com.cszjkj.aisc.cm_user.UserInfo;
 import com.cszjkj.aisc.cm_user.UserService;
 import com.cszjkj.aisc.fms_user.service.IFmsUserService;
@@ -14,7 +14,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 

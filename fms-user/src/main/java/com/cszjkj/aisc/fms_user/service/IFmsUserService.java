@@ -1,6 +1,6 @@
 package com.cszjkj.aisc.fms_user.service;
 
-import com.cszjkj.aisc.cm_user.UserDTO;
+import com.cszjkj.aisc.cm_common.dto.UserDTO;
 import com.cszjkj.aisc.cm_user.UserInfo;
 
 public interface IFmsUserService {

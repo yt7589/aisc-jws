@@ -1,7 +1,7 @@
 package com.cszjkj.aisc.fms_user.controller;
 
 import com.cszjkj.aisc.cm_common.http.Response;
-import com.cszjkj.aisc.cm_user.UserDTO;
+import com.cszjkj.aisc.cm_common.dto.UserDTO;
 import com.cszjkj.aisc.cm_user.UserInfo;
 import com.cszjkj.aisc.fms_user.dto.LoginDTO;
 import com.cszjkj.aisc.fms_user.dto.RegisterUserDTO;
