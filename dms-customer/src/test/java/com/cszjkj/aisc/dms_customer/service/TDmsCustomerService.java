@@ -23,24 +23,60 @@ public class TDmsCustomerService {
     @BeforeAll
     public static void init() {
         tests.add(1); // 用户接口测试
+        tests.add(2);
     }
 
-    @DisplayName("测试用户注册接口")
+    @DisplayName("测试查询符合条件客户列表接口")
     @Test
-    public void callGetCustomers() {
+    public void call_getCustomers_001() {
         int testId = 1;
         if (!tests.contains(testId)) {
             return;
         }
         String targetRst = "ok";
         String rst = "ok";
+        ICustomerService service = getCustomerService();
+        List<CustomerDTO> customers = service.getCustomers("", null, null, 0, 1000);
+        logger.info("customer:" + customers + "! v0.0.1");
+        Assertions.assertEquals(targetRst, rst);
+    }
+
+    @DisplayName("测试添加新客户接口")
+    @Test
+    public void test_addCustomer_001() {
+        int testId = 2;
+        if (!tests.contains(testId)) {
+            return;
+        }
+        String targetRst = "ok";
+        String rst = "ok";
+        ICustomerService service = getCustomerService();
+        CustomerDTO dto = new CustomerDTO();
+        service.addCustomer(dto);
+        Assertions.assertEquals(targetRst, rst);
+    }
+
+    private ICustomerService getCustomerService() {
         ReferenceConfig<ICustomerService> reference = new ReferenceConfig<>();
         reference.setApplication(new ApplicationConfig("first-dubbo-consumer"));
         reference.setRegistry(new RegistryConfig("zookeeper://" + zookeeperHost + ":" + zookeeperPort));
         reference.setInterface(ICustomerService.class);
-        ICustomerService service = reference.get();
-        List<CustomerDTO> customers = service.getCustomers("", null, null, 0, 1000);
-        logger.info("customer:" + customers + "!");
+        return reference.get();
+    }
+
+
+
+
+
+    @DisplayName("单元测试模板")
+    @Test
+    public void test_template() {
+        int testId = 2;
+        if (!tests.contains(testId)) {
+            return;
+        }
+        String targetRst = "ok";
+        String rst = "ok";
         Assertions.assertEquals(targetRst, rst);
     }
 }
